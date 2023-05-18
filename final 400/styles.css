@@ -1,0 +1,254 @@
+img {
+	max-width:100%;
+}
+
+nav ul, nav ol {
+	list-style-type: none;
+}
+
+
+body{
+    background-image: url(images/bornpink.jpg.webp);
+    background-repeat: no-repeat;
+	background-position: center 100px;
+	background-attachment: fixed;
+    padding-top: 200px;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100px;
+	background: #333;
+}
+
+header div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+  
+header a {
+    color: pink;
+    margin-right: 30px;
+    margin-top: -40px;
+    text-decoration: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+header img {
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+/************ ICON ***************/
+#icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh; /* 将section铺满整个视口高度 */
+	position: relative; /* 设置为相对定位 */
+  	z-index: 1; /* 提高层级，使其显示在背景图之上 */
+  }
+  
+  #icon a {
+	color: white; /* 将文字颜色设为白色 */
+	text-align: center; /* 居中对齐 */
+	padding: 10px 20px; /* 调整文字与背景的间距 */
+	background-color: pink; /* 添加粉色背景 */
+	border-radius: 20px; /* 设置背景的圆角为椭圆形 */
+	display: inline-block; /* 将<p>元素转换为内联块级元素 */
+  }
+
+/************ SHOP ***************/
+
+#shop{
+    background: pink;
+    padding: 15px 0;
+	display: grid;
+	grid-template-columns: 400px 400px;
+	grid-gap: 30px;
+}
+
+#shop article {
+	flex: 2 2 auto; /* 设置弹性增长和收缩，使每个article均匀分布 */
+	max-width: 500px; /* 设置最大宽度，以限制每个article的大小 */
+	text-align: center; /* 居中对齐文本 */
+	margin: 20px; /* 设置每个article的间距 */
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+section{ padding: 30px 15px; }
+
+.bp {
+    text-align: center;
+}
+
+.bp {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.bp {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+/************ ABOUT **************/
+#About {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: black;
+}
+
+#About a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    width: 300px; /* Adjust the desired width */
+    height: 400px; /* Adjust the desired height */
+}
+
+.image-container img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.overlay:hover {
+    opacity: 1;
+}
+
+.text {
+    color: BLACK;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.small-text {
+    font-size: 10px; /* 调整所需的字体大小 */
+    color: pink; /* 设置为粉色 */
+}
+/************ VIDEO **************/
+
+#video {
+    background: PINK;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 15px 0;
+  }
+  
+  #video embed {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  #nextButton {
+    width: 100px; /* 调整图像的宽度 */
+    height: auto; /* 根据宽度自动调整高度 */
+    margin-top: 50px; /* 调整图像与视频之间的距离 */
+  }
+/************ Card Flip Styles **************/
+
+.flip-container { perspective: 5000px; }
+	
+.flip-container.hover .back {
+	transform: rotateY(0deg);
+}
+
+.flip-container.hover .front {
+    transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+	width: 100%;
+}
+
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+	height: 0;
+	padding-top:100%;
+}
+
+.front, .back {
+	-webkit-backface-visibility: hidden; /*still needed for safari & android*/
+	backface-visibility: hidden;
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+}
+
+.front { 
+    transform: rotateY(0deg); 
+    z-index: 2; 
+}
+
+.back {
+	transform: rotateY(-180deg);
+	background:black;
+	padding:1px;
+	box-sizing: border-box;
+    left:50%;
+}
+
+.front img {
+	display:block;
+}
+
+.title {
+	text-transform:uppercase;
+	font-size:14px;
+    color:white;
+    text-align: center;
+}
+
+.name {
+	margin-bottom:10px;
+	font-weight:700;
+	color:white;
+    text-align: center;
+}

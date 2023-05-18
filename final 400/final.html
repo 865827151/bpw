@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link href="styles.css" rel="stylesheet">
+    </head>
+
+    <body>
+        
+        <header>
+            <img src="images/logo.png">
+            <div>
+                <a href="#shop">SHOP</a>
+                <a href="#About">ABOUT</a>
+                <a href="#video">VIDEO</a>
+                <a href="fanpage.html">FANPAGE</a>
+            </div>
+        </header>
+
+        <section id="icon">
+            <a href="https://www.youtube.com/watch?v=POe9SOEKotk&list=RDEMAiHpN5CrU2A2TrjDA1P9bQ&index=2&ab_channel=BLACKPINK" target="BLACKPINK">OUT NOW</a>
+        </section>
+
+        <section id="shop">
+                <img src="images/shop.png" alt="shop">
+                <br><br><br><br><br><br>
+                <article>
+                    <div class="flip-container" >
+                        <div class="flipper">
+                            <div class="front">
+                                <img class="bp" src="images/JISOO.jpg">
+                            </div>
+                            <div class="back">
+                                <p class="name">BORN PINK STANDARD DIGIPACK</p>
+                                <p class="title">JISOO Cover</p>
+                                <p class="title">$25</p>
+                            </div>
+                        </div>
+                    </div>  
+                </article>
+
+                <article>
+                    <div class="flip-container" >
+                        <div class="flipper">
+                            <div class="front">
+                                <img class="bp" src="images/JENNIE.jpg">
+                            </div>
+                            <div class="back">
+                                <p class="name">BORN PINK STANDARD DIGIPACK</p>
+                                <p class="title">Jennie Cover</p>
+                                <p class="title">$25</p>
+                            </div>
+                        </div>
+                    </div>  
+                </article>
+
+                <article>
+                    <div class="flip-container" >
+                        <div class="flipper">
+                            <div class="front">
+                                <img class="bp" src="images/ROSE.jpg">
+                            </div>
+                            <div class="back">
+                                <p class="name">BORN PINK STANDARD DIGIPACK</p>
+                                <p class="title">ROSE Cover</p>
+                                <p class="title">$25</p>
+                            </div>
+                        </div>
+                    </div>  
+                </article>
+
+                <article>
+                    <div class="flip-container" >
+                        <div class="flipper">
+                            <div class="front">
+                                <img class="bp" src="images/LISA.jpg">
+                            </div>
+                            <div class="back">
+                                <p class="name">BORN PINK STANDARD DIGIPACK</p>
+                                <p class="title">LISA Cover</p>
+                                <p class="title">$25</p>
+                            </div>
+                        </div>
+                    </div>  
+                </article>
+        </section>
+
+        <section id="About">
+            <a href="https://blackpink.lnk.to/bornpink" target="about">
+                <div class="image-container">
+                    <img src="images/BP_Digital.jpg" alt="BP Digital">
+                    <div class="overlay">
+                        <div class="text">BORN PINK
+                            <br><span class="small-text">STREAM / DOWNLOAD</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <section id="video" style="position: relative;">
+            <img id="videoImage" src="images/videos.png" alt="video" style="position: absolute; bottom: 50px; left: 10px;">
+            <div id="video1">
+              <video width="700" height="400" controls>
+                <source src="video/BLACKPINK - ‘Shut Down’ M-V.mp4" type="video/mp4">
+              </video>
+            </div>
+            <img id="nextButton" src="images/ggg.png" alt="Next MV" style="position: absolute; right: 0; bottom: 30px;">
+            <div id="video2">
+              <video width="700" height="400" controls>
+                <source src="video/BLACKPINK - ‘Pink Venom’ M-V.mp4" type="video/mp4">
+              </video>
+            </div>
+          </section>
+
+
+        <footer>
+
+        </footer>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script>
+            $('.flip-container').bind("touchstart mouseenter", function(e) {
+    
+                e.stopPropagation();
+                e.preventDefault();
+    
+                if( e.type == "mouseenter" ){
+                    $(this).addClass("hover");
+    
+                    $(this).on("mouseleave", function(e) {
+                        $(this).removeClass("hover");
+                    });
+                }
+    
+                else{
+                    if( $(this).hasClass("hover") ){
+                        $(this).removeClass("hover");
+                    }
+                    else{
+                        $(this).addClass("hover");
+                    }
+                    $('.flip-container').not(this).removeClass("hover");
+                }
+    
+            });
+        </script>
+        
+
+        <script>
+            const video1 = document.querySelector('#video1 video');
+            const video2 = document.querySelector('#video2 video');
+            const nextButton = document.getElementById('nextButton');
+          
+            video1.style.display = 'block';
+            video2.style.display = 'none';
+          
+            nextButton.addEventListener('click', function() {
+              if (video1.style.display === 'block') {
+                video1.style.display = 'none';
+                video2.style.display = 'block';
+          
+                if (!video1.paused) {
+                  video1.pause();
+                }
+                if (!video2.paused) {
+                  video2.pause();
+                }
+                video2.play();
+              } else {
+                video1.style.display = 'block';
+                video2.style.display = 'none';
+          
+                if (!video1.paused) {
+                  video1.pause();
+                }
+                if (!video2.paused) {
+                  video2.pause();
+                }
+                video1.play();
+              }
+            });
+          </script>
+
+    </body>
+</html>

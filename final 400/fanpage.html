@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FanPage</title>
+    <meta charset="UTF-8">
+    <link href="fanpage.css" rel="stylesheet">
+</head>
+<body>
+    <img src="images/Blackpink-Logo.png">
+
+  <div id="post-form">
+    <form id="post-form">
+      <input type="text" id="post-input" placeholder="Post anything you want">
+      <input type="file" id="image-input" accept="image/*">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div id="messages">
+
+  </div>
+
+  <script>
+    const postForm = document.getElementById('post-form');
+    const postInput = document.getElementById('post-input');
+    const imageInput = document.getElementById('image-input');
+    const messagesContainer = document.getElementById('messages');
+
+    // 获取帖子数据
+    const getPosts = () => {
+      const postsString = localStorage.getItem('posts');
+      return postsString ? JSON.parse(postsString) : [];
+    };
+
+    // 保存帖子数据
+    const savePosts = (posts) => {
+      localStorage.setItem('posts', JSON.stringify(posts));
+    };
+
+    // 显示帖子和留言
+    const displayPosts = () => {
+      const posts = getPosts();
+
+      posts.forEach((post, index) => {
+        const postElement = createPostElement(post.message, post.image, post.comments, index);
+        messagesContainer.appendChild(postElement);
+      });
+    };
+
+    // 创建帖子元素
+    const createPostElement = (message, image, comments, index) => {
+      const postElement = document.createElement('div');
+      postElement.classList.add('post');
+
+      const messageElement = document.createElement('p');
+      messageElement.textContent = message;
+      postElement.appendChild(messageElement);
+
+      if (image) {
+        const imageElement = document.createElement('img');
+        imageElement.src = image;
+        postElement.appendChild(imageElement);
+      }
+
+      const commentsElement = document.createElement('div');
+      commentsElement.classList.add('comments');
+
+      const commentsTitleElement = document.createElement('h4');
+      commentsTitleElement.textContent = 'Comments:';
+      commentsElement.appendChild(commentsTitleElement);
+
+      const commentListElement = document.createElement('ul');
+      commentListElement.classList.add('comment-list');
+
+      comments.forEach((comment) => {
+        const commentElement = document.createElement('li');
+        commentElement.textContent = comment;
+        commentListElement.appendChild(commentElement);
+      });
+
+      commentsElement.appendChild(commentListElement);
+      postElement.appendChild(commentsElement);
+
+      const commentForm = document.createElement('form');
+      commentForm.classList.add('comment-form');
+
+      const commentInput = document.createElement('input');
+      commentInput.type = 'text';
+      commentInput.classList.add('comment-input');
+      commentInput.placeholder = 'Type comment here';
+
+      const commentButton = document.createElement('button');
+      commentButton.type = 'submit';
+      commentButton.textContent = 'Comment';
+
+      commentForm.appendChild(commentInput);
+      commentForm.appendChild(commentButton);
+
+      commentsElement.appendChild(commentForm);
+
+      commentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const newComment = commentInput.value;
+
+        const posts = getPosts();
+        const currentPost = posts[index];
+        currentPost.comments.push(newComment);
+        savePosts(posts);
+
+        const commentElement = document.createElement('li');
+        commentElement.textContent = newComment;
+        commentListElement.appendChild(commentElement);
+
+        commentInput.value = '';
+      });
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.classList.add('delete-button');
+      deleteButton.setAttribute('data-index', index);
+      postElement.appendChild(deleteButton);
+
+      deleteButton.addEventListener('click', (e) => {
+        const index = e.target.getAttribute('data-index');
+        const posts = getPosts();
+        posts.splice(index, 1);
+        savePosts(posts);
+        postElement.remove();
+      });
+
+      return postElement;
+    };
+
+    // 提交帖子
+    postForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const message = postInput.value;
+      const imageFile = imageInput.files[0];
+
+      if (imageFile) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const image = event.target.result;
+
+          const post = { message, image, comments: [] };
+
+          const posts = getPosts();
+          posts.push(post);
+          savePosts(posts);
+
+          const postElement = createPostElement(message, image, [], posts.length - 1);
+          messagesContainer.appendChild(postElement);
+
+          postInput.value = '';
+          imageInput.value = '';
+        };
+
+        reader.readAsDataURL(imageFile);
+      } else {
+        const post = { message, image: '', comments: [] };
+
+        const posts = getPosts();
+        posts.push(post);
+        savePosts(posts);
+
+        const postElement = createPostElement(message, '', [], posts.length - 1);
+        messagesContainer.appendChild(postElement);
+
+        postInput.value = '';
+        imageInput.value = '';
+      }
+    });
+
+    // 页面加载时显示帖子和留言
+    displayPosts();
+  </script>
+</body>
+</html>
